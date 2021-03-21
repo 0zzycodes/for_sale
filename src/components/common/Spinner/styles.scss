@@ -1,0 +1,40 @@
+@import "../../../constants/scss/colors";
+@import "../../../constants/scss/variables";
+@import "../../../constants/scss/mixins";
+
+.SpinnerOverlay {
+  height: 90vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  .SpinnerImage {
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+  }
+  .SpinnerContainer {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 3px solid lighten($color: $tint, $amount: 30);
+    border-radius: 50%;
+    border-top-color: $tint;
+    animation: spin 1s ease-in-out infinite;
+    -webkit-animation: spin 1s ease-in-out infinite;
+    position: absolute;
+
+    @keyframes spin {
+      to {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+    @-webkit-keyframes spin {
+      to {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+  }
+}

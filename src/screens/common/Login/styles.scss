@@ -1,0 +1,59 @@
+@import "../../../constants/scss/colors";
+@import "../../../constants/scss/variables";
+@import "../../../constants/scss/mixins";
+
+.login {
+  display: flex;
+  flex-direction: column;
+  .head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    span {
+      color: $black;
+    }
+  }
+  .head-text-bold {
+    font-family: "FiraSemiBold";
+    font-size: 2.2em;
+  }
+  .head-text-light {
+    font-family: "FiraBold";
+    font-size: 1.2em;
+  }
+  .role-navigator {
+    height: 5em;
+    align-items: center;
+    margin-bottom: auto;
+    span {
+      display: block;
+      padding: 0.4em 2em;
+      cursor: pointer;
+    }
+    .admin-role {
+    }
+    .cashier-role {
+    }
+  }
+  .form-container {
+    background-color: #ffffff;
+    width: 30vw;
+    padding: 2em;
+    box-shadow: $shadow;
+    border-radius: 1em;
+    margin-top: auto;
+    @include small-laptop() {
+      width: 50vw;
+    }
+    @include tablet() {
+      width: 60vw;
+    }
+    @include smartphone() {
+      width: 90vw;
+    }
+    .inputGrouping {
+      justify-content: space-between;
+    }
+  }
+}

@@ -1,0 +1,23 @@
+@import "../../../constants/scss/colors";
+@import "../../../constants/scss/variables";
+@import "../../../constants/scss/mixins";
+
+.icon {
+  border: 0.3em solid $tint;
+  border-radius: 50%;
+  padding: 0.5em;
+}
+.line {
+  width: 6em;
+  height: 0.1em;
+  background-color: $black;
+  margin: 0 1em;
+}
+.pathBtn {
+  padding: 0.3em;
+  // height: 2.2em;
+  font-family: "FiraBold";
+  font-size: 1.2em;
+  margin: 0 !important;
+  width: 8em;
+}

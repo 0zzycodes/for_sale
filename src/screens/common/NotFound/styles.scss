@@ -1,0 +1,92 @@
+@import "../../../constants/scss/colors";
+@import "../../../constants/scss/variables";
+@import "../../../constants/scss/mixins";
+
+// Mixin
+
+.notFound {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 !important;
+  padding: 0 !important;
+
+  .notFoundContainer {
+    min-height: 25em;
+    width: 70%;
+    border-radius: 1em;
+    box-shadow: $shadow;
+    .heading {
+      padding: 4em 0;
+      background-color: $danger;
+      border-top-left-radius: 1em;
+      border-top-right-radius: 1em;
+
+      h4 {
+        color: $white;
+        font-size: 1.5em;
+        text-align: center;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+    }
+    .body {
+      text-align: center;
+      padding: 2em;
+      h3,
+      span {
+        margin: 0 0 1em 0 !important;
+      }
+      h3 {
+        font-size: 3.2em;
+      }
+      .ooops {
+        letter-spacing: 0.1em;
+        font-size: 2em;
+        display: block;
+      }
+      .suggestedReason {
+        letter-spacing: 0.2em;
+        font-size: 1.3em;
+        font-weight: 500;
+        letter-spacing: 0.2px;
+        line-height: 1.42857143;
+        word-wrap: break-word;
+        margin-bottom: 4em;
+      }
+      .navigationButtons {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .btn {
+          cursor: pointer;
+          height: 2.3em !important;
+          padding: 0 !important;
+          width: 70%;
+          display: flex;
+          align-items: center;
+          justify-content: space-evenly;
+          text-align: center;
+          background-color: $tint;
+          color: $white;
+          box-sizing: border-box;
+          border: none;
+          border-radius: 2em;
+          box-shadow: $shadow;
+          font-weight: 700 !important;
+          img {
+            height: 1.1em;
+          }
+          &:active {
+            box-shadow: 0px 4px 6px #00000000;
+          }
+        }
+      }
+    }
+  }
+}

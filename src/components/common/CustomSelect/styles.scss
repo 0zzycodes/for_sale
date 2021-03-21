@@ -1,0 +1,28 @@
+@import "../../../constants/scss/colors";
+@import "../../../constants/scss/variables";
+@import "../../../constants/scss/mixins";
+ul {
+  max-height: 0;
+  transition: max-height 0.5s;
+  overflow-y: hidden;
+  &:hover {
+    overflow-y: scroll;
+  }
+
+  &.show {
+    max-height: 250px;
+    &:hover {
+      overflow-y: scroll;
+    }
+  }
+
+  li {
+    &:hover {
+      background: #efefef;
+    }
+
+    &:focus {
+      background: #ffffff;
+    }
+  }
+}

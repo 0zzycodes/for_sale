@@ -1,0 +1,37 @@
+@import "../../../constants/scss/colors";
+@import "../../../constants/scss/variables";
+@import "../../../constants/scss/mixins";
+.navbar {
+  padding: 1.5em 3%;
+  width: 100%;
+  background-color: $textColor;
+  .logo-container {
+    img {
+      width: 8em;
+    }
+  }
+  .btn {
+    padding: 0 2em !important;
+    height: 2.2em;
+    margin-left: auto;
+    background-color: $black;
+    a {
+      font-size: 0.8em !important;
+      color: $white;
+      font-family: "FiraBold" !important;
+    }
+  }
+}
+.children-container {
+  width: 100%;
+  min-height: calc(100vh - 7.6em);
+  padding-bottom: 2em;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-image: linear-gradient(#999797ec, #8a8888e7),
+    url("../../../assets/icons/logo-icon.svg");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}

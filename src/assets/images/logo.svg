@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1036" height="356" viewBox="0 0 1036 356">
+  <defs>
+    <filter id="toque" x="342" y="48" width="643" height="266" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="logo" transform="translate(264.182 849)">
+    <rect id="Rectangle_14" data-name="Rectangle 14" width="1036" height="356" transform="translate(-264.182 -849)" fill="none"/>
+    <g id="Layer_2" data-name="Layer 2" transform="translate(-204.667 -838.212)">
+      <g id="Layer_1" data-name="Layer 1" transform="translate(0 0)">
+        <rect id="Rectangle_1" data-name="Rectangle 1" width="10.061" height="26.493" transform="translate(161.608 290.117)" fill="#808285"/>
+        <rect id="Rectangle_2" data-name="Rectangle 2" width="26.493" height="10.061" transform="translate(162.609 283.383)" fill="#808285"/>
+        <rect id="Rectangle_3" data-name="Rectangle 3" width="26.493" height="10.061" transform="translate(205.443 257.729)" fill="#808285"/>
+        <rect id="Rectangle_4" data-name="Rectangle 4" width="26.493" height="10.061" transform="translate(214.159 139.582)" fill="#808285"/>
+        <path id="Path_1" data-name="Path 1" d="M184.547,285.65,161.38,306.339,28.45,194.684,52.375,174.43Z" transform="translate(0.319 1.939)" fill="#18488c"/>
+        <rect id="Rectangle_5" data-name="Rectangle 5" width="7.422" height="26.493" transform="translate(91.057 21.284)" fill="#808285"/>
+        <path id="Path_2" data-name="Path 2" d="M238.823,147.249l-27.059,24.218L68.54,51.146,96.408,25.26Z" transform="translate(0.767 0.271)" fill="#18488c"/>
+        <g id="Group_2" data-name="Group 2" transform="translate(49.114 171.333)" opacity="0.7">
+          <g id="Group_1" data-name="Group 1">
+            <path id="Path_3" data-name="Path 3" d="M192.876,288.689l-12.62,3.519L48.57,179.764l6.5-10.314S196.486,284.5,192.876,288.689Z" transform="translate(-48.57 -169.45)" fill="#231f20"/>
+          </g>
+        </g>
+        <g id="Group_4" data-name="Group 4" transform="translate(49.114 169.22)" opacity="0.7">
+          <g id="Group_3" data-name="Group 3">
+            <path id="Path_4" data-name="Path 4" d="M192.876,286.589l-12.62,3.519L48.57,177.664l6.5-10.3S196.486,282.4,192.876,286.589Z" transform="translate(-48.57 -167.36)" fill="#231f20"/>
+          </g>
+        </g>
+        <g id="Group_6" data-name="Group 6" transform="translate(13.965 189.808)" opacity="0.6">
+          <g id="Group_5" data-name="Group 5">
+            <path id="Path_5" data-name="Path 5" d="M13.81,193.474l20.062-5.754L169.654,303.693,163,322.733Z" transform="translate(-13.81 -187.72)" fill="#231f20"/>
+          </g>
+        </g>
+        <path id="Path_6" data-name="Path 6" d="M9.547,140.294C-2.719,129.343-1.374,110.909,9.2,99.048L28.314,83.88,229.742,258.613l-40.66,33.9Z" transform="translate(0.009 0.926)" fill="#18488c"/>
+        <g id="Group_8" data-name="Group 8" transform="translate(90.572 18.463)" opacity="0.7">
+          <g id="Group_7" data-name="Group 7">
+            <path id="Path_7" data-name="Path 7" d="M244.271,150.23l-13.712,3.6L89.57,29.342,96.81,18.27S248.265,145.75,244.271,150.23Z" transform="translate(-89.57 -18.27)" fill="#231f20"/>
+          </g>
+        </g>
+        <path id="Path_8" data-name="Path 8" d="M255.116,105.011c9.475,8.464,8.18,23-.283,32.479l-15.168,12.134L90.05,20.84,105.218,7.695A23,23,0,0,1,137.7,5.855Z" transform="translate(1.007 -0.012)" fill="#27aae1"/>
+        <path id="Path_9" data-name="Path 9" d="M6.6,230.353c-9.485-8.454-8.18-22.994.273-32.469L22.044,185.75,171.669,314.534,156.5,327.68a22.994,22.994,0,0,1-32.469,1.84Z" transform="translate(0 2.066)" fill="#27aae1"/>
+        <g id="Group_10" data-name="Group 10" transform="translate(11.123 71.459)" opacity="0.5">
+          <g id="Group_9" data-name="Group 9">
+            <path id="Path_10" data-name="Path 10" d="M239.376,260.995l-24.8,10.749L11,92.795,26.956,70.68S247.617,251.722,239.376,260.995Z" transform="translate(-11 -70.68)" fill="#231f20"/>
+          </g>
+        </g>
+        <path id="Path_11" data-name="Path 11" d="M253.142,205.286c13.145,11.75,11.376,31.964-.384,45.139l-21.114,16.907L15.21,79.778,60.167,42Z" transform="translate(0.17 0.458)" fill="#27aae1"/>
+      </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, -264.18, -849)" filter="url(#toque)">
+      <text id="toque-2" data-name="toque" transform="translate(351 252)" fill="#18488c" font-size="213" font-family="CascadiaCode-Bold, Cascadia Code" font-weight="700"><tspan x="0" y="0">toque</tspan></text>
+    </g>
+  </g>
+</svg>

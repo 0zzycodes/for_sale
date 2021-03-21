@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import "./constants/scss/colors";
+@import "./constants/scss/variables";
+@import "./constants/scss/mixins";
+@import "./constants/scss/default";
+@import "./constants/scss/framework";
+@import "./constants/scss/fonts";
+
+.input-seperator {
+  height: 2em;
+}
+.btn {
+  cursor: pointer;
+  height: 2.5em;
+  padding: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: $tint;
+  color: $white;
+  border-radius: 3em;
+  box-shadow: $shadow;
+  font-weight: 700 !important;
+  margin-left: 2em;
+  a {
+    font-size: 0.9em !important;
+    margin: 0 !important;
+    color: $white !important;
+  }
+}
+.cta {
+  padding: 0 2em;
+  height: 3.5em;
+  width: 13em;
+  font-size: 1.2em;
+  box-shadow: $shadow;
+}
+.cta img {
+  height: 0.8em;
+  width: 0.8em;
+  margin-left: 0.8em;
+}

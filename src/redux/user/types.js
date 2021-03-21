@@ -1,0 +1,4 @@
+export const ActionTypes = {
+  SET_CURRENT_USER: "SET_CURRENT_USER",
+  SET_CURRENT_USER_ROLE: "SET_CURRENT_USER_ROLE",
+};
