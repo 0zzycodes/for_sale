@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import CustomButton from "../../../components/common/CustomButton/CustomButton";
 import CustomInput from "../../../components/common/CustomInput/CustomInput";
 import Spacing from "../../../components/common/Spacing/Spacing";
 import { colors } from "../../../constants/Colors";
@@ -6,6 +7,12 @@ import "./styles.scss";
 
 const Login = () => {
   const [loginAs, setLoginAs] = useState("admin");
+  const activeStyle = {
+    backgroundColor: colors.black,
+    color: colors.white,
+    boxShadow: "0px 3px 6px #00000015",
+    borderRadius: "4em",
+  };
   return (
     <div className="login">
       <Spacing height="3em" />
@@ -18,16 +25,7 @@ const Login = () => {
       <div className="flex-horizontal-center role-navigator">
         <div
           className="admin-role"
-          style={
-            loginAs === "admin"
-              ? {
-                  backgroundColor: colors.black,
-                  color: colors.white,
-                  boxShadow: "0px 3px 6px #00000015",
-                  borderRadius: ".6em",
-                }
-              : {}
-          }
+          style={loginAs === "admin" ? activeStyle : {}}
           onClick={() => setLoginAs("admin")}
         >
           {" "}
@@ -37,16 +35,7 @@ const Login = () => {
         <Spacing width="5em" />
         <div
           className="cashier-role"
-          style={
-            loginAs === "cashier"
-              ? {
-                  backgroundColor: colors.black,
-                  color: colors.white,
-                  boxShadow: "0px 3px 6px #00000015",
-                  borderRadius: ".6em",
-                }
-              : {}
-          }
+          style={loginAs === "cashier" ? activeStyle : {}}
           onClick={() => setLoginAs("cashier")}
         >
           {" "}
@@ -89,6 +78,8 @@ const AdminLogin = () => {
         type={"password"}
         onChange={({ target }) => setPasscode(target.value)}
       />
+      <Spacing height="3em" />
+      <CustomButton label="Login" onClick={onSubmit} className="login-btn" />
     </form>
   );
 };
@@ -131,6 +122,8 @@ const CashierLogin = () => {
         type={"password"}
         onChange={({ target }) => setPasscode(target.value)}
       />
+      <Spacing height="3em" />
+      <CustomButton label="Login" onClick={onSubmit} className="login-btn" />
     </form>
   );
 };

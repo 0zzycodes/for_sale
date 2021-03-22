@@ -31,13 +31,9 @@
       padding: 0.4em 2em;
       cursor: pointer;
     }
-    .admin-role {
-    }
-    .cashier-role {
-    }
   }
   .form-container {
-    background-color: #ffffff;
+    background-image: linear-gradient(#f5f6f7, #7b7b7c);
     width: 30vw;
     padding: 2em;
     box-shadow: $shadow;
@@ -54,6 +50,10 @@
     }
     .inputGrouping {
       justify-content: space-between;
+    }
+    .login-btn {
+      margin: 0 auto;
+      width: 90%;
     }
   }
 }

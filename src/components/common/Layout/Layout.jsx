@@ -1,13 +1,11 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../../assets/images/logo.png";
+import Spacing from "../Spacing/Spacing";
 import "./styles.scss";
 
 const AuthLayout = ({ children }) => {
   const location = useLocation();
-  console.log("====================================");
-  console.log(location.pathname);
-  console.log("====================================");
   return (
     <>
       <nav className="flex-vertical-center navbar">
@@ -25,7 +23,11 @@ const AuthLayout = ({ children }) => {
           </Link>
         </span>
       </nav>
-      <div className="children-container">{children}</div>
+
+      <div className="children-container">
+        <Spacing height={"6em"} />
+        {children}
+      </div>
     </>
   );
 };

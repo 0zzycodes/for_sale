@@ -1,7 +1,8 @@
 export const Lite = {
   label: "Lite",
-  price: "5000 / month",
-  annualPrice: "50,000 / year",
+  price: "5000",
+  annualPrice: "50000",
+  sixMonthPrice: "25000",
   features: [
     "2 Branches",
     "4 Cashiers",
@@ -14,8 +15,9 @@ export const Lite = {
 };
 export const Pro = {
   label: "Pro",
-  price: "6500 / month",
-  annualPrice: "68,000 / year",
+  price: "6500",
+  sixMonthPrice: "34000",
+  annualPrice: "68000",
   features: [
     "6 Branches",
     "16 Cashiers",

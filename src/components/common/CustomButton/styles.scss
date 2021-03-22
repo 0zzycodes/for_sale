@@ -2,8 +2,7 @@
 @import "../../../constants/scss/variables";
 @import "../../../constants/scss/mixins";
 
-.pay-now-btn {
-  min-width: 165px;
+.btn {
   width: auto;
   font-size: 15px;
   background-color: $black !important;
@@ -11,13 +10,20 @@
   text-transform: capitalize;
   font-family: "FiraBold";
   border: none;
+  padding: 1em 2em;
   cursor: pointer;
   display: flex;
   justify-content: center;
   transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-
+  a {
+    font-family: "FiraBold";
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
   &:hover {
     background-image: linear-gradient(#f5f6f7ec, #7b7b7ce7) !important;
     color: black;
+    a {
+      color: $black !important;
+    }
   }
 }
