@@ -5,7 +5,7 @@ import Spacing from "../Spacing/Spacing";
 
 import "./styles.scss";
 
-const RegisterPath = ({ step, setStep, choice, completed }) => {
+const RegisterPath = ({ step }) => {
   const styles = {
     icon: {
       border: ".3em solid #f5f6f7",
@@ -14,19 +14,8 @@ const RegisterPath = ({ step, setStep, choice, completed }) => {
       transition: "all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)",
     },
   };
-  const onStepChange = (e) => {
-    if (step >= 1 || step <= 4) setStep(e);
-  };
   return (
     <div className="flex-horizontal-center path">
-      <button
-        className={`btn path-btn ${step > 1 && !completed ? "show-btn" : null}`}
-        onClick={() => {
-          onStepChange(step - 1);
-        }}
-      >
-        prev
-      </button>
       <Spacing width={"3em"} />
       <div style={step >= 1 ? styles.icon : {}}>
         <AntDesign name="star" size={20} color={colors.black} />
@@ -54,17 +43,6 @@ const RegisterPath = ({ step, setStep, choice, completed }) => {
         <Octicons name="verified" size={20} color={colors.black} />
       </div>
       <Spacing width={"3em"} />
-      <button
-        className={`btn path-btn ${step < 4 && "show-btn"}`}
-        onClick={() => {
-          if ((step === 2 && !choice.plan) || step === 3) {
-            return;
-          }
-          onStepChange(step + 1);
-        }}
-      >
-        Next
-      </button>
     </div>
   );
 };

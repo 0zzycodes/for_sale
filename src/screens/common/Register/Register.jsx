@@ -1,22 +1,27 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { MaterialCommunityIcons } from "react-web-vector-icons";
-import CustomButton from "../../../components/common/CustomButton/CustomButton";
-import CustomInput from "../../../components/common/CustomInput/CustomInput";
 import PaymentPlanPreview from "../../../components/common/PaymentPlanPreview/PaymentPlanPreview";
 import PayWithPaystack from "../../../components/common/PayWithPaystack/PayWithPaystack";
 import PlanPreview from "../../../components/common/PlanPreview/PlanPreview";
 import RegisterPath from "../../../components/common/RegisterPath/RegisterPath";
+import RegistrationForm from "../../../components/common/RegistrationForm/RegistrationForm";
 import Spacing from "../../../components/common/Spacing/Spacing";
+import Spinner from "../../../components/common/Spinner/Spinner";
 import { colors } from "../../../constants/Colors";
-import { Lite, Pro } from "../../../constants/plans";
+import { Lite, Pro, Trial } from "../../../constants/plans";
+import { setStep as setStepAction } from "../../../redux/dashboard/actions";
 
 import "./styles.scss";
 
 const Register = () => {
-  const [step, setStep] = useState(1);
+  const step = useSelector((state) => state.dashboard.step);
+  const dispatch = useDispatch();
+  const setStep = (e) => dispatch(setStepAction(e));
   const [planAmount, setPlanAmount] = useState(null);
   const [completed, setCompleted] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [choice, setChoice] = useState({
     plan: null,
     data: null,
@@ -33,19 +38,36 @@ const Register = () => {
         </span>
       </div>
       <Spacing height="2em" />
-      <RegisterPath
-        step={step}
-        setStep={setStep}
-        choice={choice}
-        completed={completed}
-      />
+      <RegisterPath step={step} />
       <Spacing height="4em" />
-      {step === 1 && <RegistrationForm />}
+      {step === 1 && <RegistrationForm setStep={setStep} />}
       {step === 2 && (
-        <div className={`select-plan ${step === 2 && "show-plan"}`}>
-          <PlanPreview data={Lite} setStep={setStep} setChoice={setChoice} />
-          <PlanPreview data={Pro} setStep={setStep} setChoice={setChoice} />
-        </div>
+        <>
+          {loading ? (
+            <Spinner style={{ height: "20vh" }} />
+          ) : (
+            <div className={`select-plan ${step === 2 && "show-plan"}`}>
+              <PlanPreview
+                data={Trial}
+                setStep={setStep}
+                setChoice={setChoice}
+                setLoading={setLoading}
+              />
+              <PlanPreview
+                data={Lite}
+                setStep={setStep}
+                setChoice={setChoice}
+                setLoading={setLoading}
+              />
+              <PlanPreview
+                data={Pro}
+                setStep={setStep}
+                setChoice={setChoice}
+                setLoading={setLoading}
+              />
+            </div>
+          )}
+        </>
       )}
       {step === 3 && (
         <div
@@ -68,6 +90,8 @@ const Register = () => {
               amount={planAmount * 1}
               setStep={setStep}
               setCompleted={setCompleted}
+              setLoading={setLoading}
+              plan={choice.plan}
             />
           )}
         </div>
@@ -82,9 +106,11 @@ const Register = () => {
           <Spacing height={"3em"} />
           <h3 className="success-text">Registration Successful!</h3>
           <Spacing height={"1.5em"} />
-          <button className="btn success-btn">
-            <Link to="/">Go to dashboard</Link>
-          </button>
+          <Link to="/">
+            <button className="btn success-btn" onClick={() => setStep(1)}>
+              Go to dashboard
+            </button>
+          </Link>
         </div>
       )}
     </div>
@@ -92,84 +118,3 @@ const Register = () => {
 };
 
 export default Register;
-
-const RegistrationForm = () => {
-  const [firstName, setFirstName] = useState();
-  const [lastName, setLastName] = useState();
-  const [email, setEmail] = useState();
-  const [phone, setPhone] = useState();
-  const [businessName, setBusinessName] = useState();
-  const [homeAddress, setHomeAddress] = useState();
-  const [passcode, setPasscode] = useState();
-  const [confirmPasscode, setConfirmPasscode] = useState();
-  const onSubmit = () => {};
-
-  return (
-    <form onSubmit={onSubmit} className="form-container">
-      <div className="flex-horizontal-center inputGrouping">
-        <CustomInput
-          label="First name"
-          value={firstName}
-          type={"text"}
-          onChange={({ target }) => setFirstName(target.value)}
-        />
-        <Spacing height="2em" />
-        <CustomInput
-          label="Last name"
-          value={lastName}
-          type={"text"}
-          onChange={({ target }) => setLastName(target.value)}
-        />
-      </div>
-
-      <Spacing height="2em" />
-      <CustomInput
-        label="Business name"
-        value={businessName}
-        type={"text"}
-        onChange={({ target }) => setBusinessName(target.value)}
-      />
-      <Spacing height="2em" />
-      <CustomInput
-        label="Email"
-        value={email}
-        type={"email"}
-        onChange={({ target }) => setEmail(target.value)}
-      />
-      <Spacing height="2em" />
-      <CustomInput
-        label="Phone number"
-        value={phone}
-        type={"number"}
-        onChange={({ target }) => setPhone(target.value)}
-      />
-      <Spacing height="2em" />
-      <CustomInput
-        label="Home address"
-        value={homeAddress}
-        type={"address"}
-        onChange={({ target }) => setHomeAddress(target.value)}
-      />
-      <Spacing height="2em" />
-      <CustomInput
-        label="Passcode"
-        value={passcode}
-        type={"password"}
-        onChange={({ target }) => setPasscode(target.value)}
-      />
-      <Spacing height="2em" />
-      <CustomInput
-        label="Confirm passcode"
-        value={confirmPasscode}
-        type={"password"}
-        onChange={({ target }) => setConfirmPasscode(target.value)}
-      />
-      <Spacing height="3em" />
-      <CustomButton
-        label="Register"
-        onClick={onSubmit}
-        className="register-btn"
-      />
-    </form>
-  );
-};

@@ -1,0 +1,35 @@
+@import "../../../constants/scss/colors";
+@import "../../../constants/scss/variables";
+@import "../../../constants/scss/mixins";
+
+.form-container {
+  background-image: linear-gradient(#f5f6f791, #7b7b7cbb);
+  width: 32vw;
+  padding: 2em;
+  box-shadow: $shadow;
+  border-radius: 1em;
+  margin-top: auto;
+  @include small-laptop() {
+    width: 50vw;
+  }
+  @include tablet() {
+    width: 60vw;
+  }
+  @include smartphone() {
+    width: 90vw;
+  }
+  .inputGrouping {
+    justify-content: space-between;
+  }
+  .register-btn {
+    margin: 0 auto;
+    width: 90%;
+  }
+}
+.verify-email {
+  padding: 0 4em;
+  flex-direction: column;
+  .reload-btn {
+    height: 2em;
+  }
+}

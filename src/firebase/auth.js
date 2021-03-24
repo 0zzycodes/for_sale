@@ -1,10 +1,11 @@
 import firebase, { auth, firestore } from "./config";
 
 export const createShopProfile = async (data) => {
-  const { name, address, ownerId, shopId } = data;
-  const shopRef = firestore.doc(`shopOwners/${ownerId}/shops/${shopId}`);
+  const { name, address, ownerId, shopId, branchCode } = data;
+  const shopRef = firestore.doc(`shops/${ownerId}/branches/${shopId}`);
   const shopData = {
     id: shopId,
+    branchCode,
     name,
     address,
   };
@@ -14,31 +15,40 @@ export const createShopProfile = async (data) => {
     console.log("error creating shop", error.message);
   }
 };
-export const createShopAdminProfile = async (userAuth, fullname) => {
+export const createShopAdminProfile = async (userAuth, otherProps) => {
   if (!userAuth) return;
-  //   const userRef = firestore.doc(`shop/${shopId}/admin/${userAuth.uid}`);
-  const userRef = firestore.doc(`shopOwners/${userAuth.uid}`);
-
+  const userRef = firestore.doc(`users/${userAuth.uid}`);
   const snapShot = await userRef.get();
 
   if (!snapShot.exists) {
-    const { displayName, email, emailVerified, uid, photoUri } = userAuth;
+    const {
+      firstName,
+      lastName,
+      phone,
+      businessName,
+      homeAddress,
+    } = otherProps;
+    const { email, emailVerified, uid, photoUri } = userAuth;
     const createdAt = Date.now();
     const userData = {
       id: uid,
-      name: fullname || displayName,
+      firstName,
+      lastName,
+      phone,
+      businessName,
+      homeAddress,
       email,
       createdAt: createdAt,
-      profileImage:
-        photoUri || `https://api.adorable.io/avatars/285/${uid}.png`,
-      hasShop: false,
+      profileImage: photoUri || "",
+      hasBranch: false,
+      hasSubcribedBefore: false,
       isSubscribed: false,
+      subExpireDate: "",
       emailVerified,
     };
-
     try {
-      await userRef.set(userData);
       auth.currentUser.sendEmailVerification();
+      await userRef.set(userData);
     } catch (error) {
       console.log("error creating user", error.message);
     }

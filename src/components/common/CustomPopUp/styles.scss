@@ -1,0 +1,18 @@
+.container {
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 1em 1em;
+  border-radius: 1em;
+  background-color: #2cd990;
+}
+.containerErr {
+  background-color: #fe524d;
+}
+.text {
+  color: white;
+  font-weight: 500;
+  font-size: 1.6em;
+  display: block;
+  margin: auto;
+}

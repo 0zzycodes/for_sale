@@ -1,3 +1,16 @@
+export const Trial = {
+  label: "Trial",
+  price: "0",
+  features: [
+    "2 Branches",
+    "4 Cashiers",
+    "500 Inventory",
+    "24/7 Support",
+    "Daily sales report",
+    "Notificatons",
+    "Sales prediction",
+  ],
+};
 export const Lite = {
   label: "Lite",
   price: "5000",

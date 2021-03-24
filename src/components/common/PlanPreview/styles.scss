@@ -12,6 +12,8 @@
   padding: 2em 0;
   color: $white;
   margin: 1em;
+  display: flex;
+  flex-direction: column;
   @include small-laptop() {
     width: 50%;
   }
@@ -38,12 +40,25 @@
     margin: 0.5em 0;
   }
   .select-plan-btn {
-    background-color: $black;
-    color: $white;
+    background-image: linear-gradient(#f5f6f7ec, #7b7b7ce7) !important;
+    color: $black !important;
     font-size: 1.4em;
     height: 2.2em;
     width: 80%;
-    margin: 0 auto !important;
+    margin: 0 auto;
+    margin-top: auto;
+    &:hover {
+      background-image: linear-gradient(#151617ec, #626364e7) !important;
+      color: $white !important;
+    }
+  }
+  .pro-select-plan-btn {
+    background-image: linear-gradient(#151617ec, #626364e7) !important;
+    color: $white !important;
+    &:hover {
+      background-image: linear-gradient(#f5f6f7ec, #7b7b7ce7) !important;
+      color: $black !important;
+    }
   }
   .tag {
     position: absolute;
@@ -54,8 +69,8 @@
     justify-content: flex-end;
     .tag-btn {
       height: 2.2em;
-      background-color: $danger;
-      color: $white;
+      background-color: $danger !important;
+      color: $white !important;
       font-size: 1.1em;
       width: 25%;
       box-shadow: $shadow;

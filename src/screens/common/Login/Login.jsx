@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import CustomButton from "../../../components/common/CustomButton/CustomButton";
 import CustomInput from "../../../components/common/CustomInput/CustomInput";
+import CustomPopUp from "../../../components/common/CustomPopUp/CustomPopUp";
 import Spacing from "../../../components/common/Spacing/Spacing";
 import { colors } from "../../../constants/Colors";
+import { auth } from "../../../firebase/config";
 import "./styles.scss";
 
 const Login = () => {
   const [loginAs, setLoginAs] = useState("admin");
+  const [loading, setLoading] = useState(false);
   const activeStyle = {
     backgroundColor: colors.black,
     color: colors.white,
@@ -43,27 +46,53 @@ const Login = () => {
         </div>
       </div>
       <Spacing height="6em" />
-      {loginAs === "admin" ? <AdminLogin /> : <CashierLogin />}
+      {loginAs === "admin" ? (
+        <AdminLogin setLoading={setLoading} />
+      ) : (
+        <CashierLogin setLoading={setLoading} />
+      )}
     </div>
   );
 };
 
 export default Login;
 
-const AdminLogin = () => {
-  const [shopCode, setShopCode] = useState();
+const AdminLogin = ({ setLoading }) => {
   const [email, setEmail] = useState();
   const [passcode, setPasscode] = useState();
-  const onSubmit = () => {};
+  const [errorMessage, setErrorMessage] = useState("");
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      await auth.signInWithEmailAndPassword(email, passcode);
+      setEmail("");
+      setPasscode("");
+      setLoading(false);
+    } catch (error) {
+      error.code === "auth/wrong-password"
+        ? setErrorMessage(
+            "The password is invalid or the user does not have a password."
+          )
+        : error.code === "auth/user-not-found"
+        ? setErrorMessage(
+            "There is no user record corresponding to this identifier."
+          )
+        : setErrorMessage("Shit just got real");
+      setLoading(false);
+    }
+  };
 
   return (
     <form onSubmit={onSubmit} className="form-container">
-      <CustomInput
-        label="Shop code"
-        value={shopCode}
-        type={"number"}
-        onChange={({ target }) => setShopCode(target.value)}
-      />
+      {errorMessage !== "" ? (
+        <CustomPopUp
+          message={`${errorMessage}`}
+          type={"error"}
+          customStyles={{ backgroundColor: colors.danger }}
+          customTextStyles={{ color: colors.white }}
+        />
+      ) : null}
       <Spacing height="2em" />
       <CustomInput
         label="Email"
@@ -83,15 +112,45 @@ const AdminLogin = () => {
     </form>
   );
 };
-const CashierLogin = () => {
+const CashierLogin = ({ setLoading }) => {
   const [shopCode, setShopCode] = useState();
   const [branch, setBranch] = useState();
   const [username, setUsername] = useState();
   const [passcode, setPasscode] = useState();
-  const onSubmit = () => {};
+  const [errorMessage, setErrorMessage] = useState("");
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      // TODO: Send Cashier login request login to cashier login endpoint
+      setShopCode("");
+      setBranch("");
+      setUsername("");
+      setPasscode("");
+      setLoading(false);
+    } catch (error) {
+      error.code === "auth/wrong-password"
+        ? setErrorMessage("The password is invalid")
+        : error.code === "auth/user-not-found"
+        ? setErrorMessage(
+            "There is no user record corresponding to this identifier."
+          )
+        : setErrorMessage("Shit just got real");
+      setLoading(false);
+    }
+  };
 
   return (
     <form onSubmit={onSubmit} className="form-container">
+      {errorMessage !== "" ? (
+        <CustomPopUp
+          message={`${errorMessage}`}
+          type={"error"}
+          customStyles={{ backgroundColor: colors.danger }}
+          customTextStyles={{ color: colors.white }}
+        />
+      ) : null}
+      <Spacing height="2em" />
       <div className="flex-horizontal-center inputGrouping">
         <CustomInput
           label="Shop code"

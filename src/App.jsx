@@ -29,12 +29,11 @@ const App = () => {
         try {
           const userRef = await createShopAdminProfile(userAuth);
           userRef.onSnapshot((snapShot) => {
-            dispatch(
-              setCurrentUser({
-                id: snapShot.id,
-                ...snapShot.data(),
-              })
-            );
+            const data = { id: snapShot.id, ...snapShot.data() };
+            dispatch(setCurrentUser(data));
+            data.emailVerified === false &&
+              userAuth.emailVerified === true &&
+              snapShot.ref.update({ emailVerified: true });
             setLoading(false);
           });
         } catch (error) {
@@ -64,20 +63,24 @@ const App = () => {
       <Route
         exact
         path="/"
-        render={() =>
-          currentUser && currentUser.role === "admin" ? (
-            <AdminDashboard />
-          ) : currentUser && currentUser.role === "cashier" ? (
-            <CashierDashboard />
-          ) : (
-            <Redirect to={`/login`} />
-          )
-        }
+        render={() => {
+          if (currentUser && currentUser.hasSubcribedBefore) {
+            return currentUser && currentUser.role === "admin" ? (
+              <AdminDashboard />
+            ) : currentUser && currentUser.role === "cashier" ? (
+              <CashierDashboard />
+            ) : (
+              <Redirect to={`/login`} />
+            );
+          } else {
+            return <Redirect to={`/register`} />;
+          }
+        }}
       />
       <Route
         path="/login"
         render={() =>
-          currentUser ? (
+          currentUser && currentUser.hasSubcribedBefore ? (
             <Redirect to={`/`} />
           ) : (
             <AuthLayout>
@@ -90,7 +93,7 @@ const App = () => {
       <Route
         path="/register"
         render={() =>
-          currentUser ? (
+          currentUser && currentUser.hasSubcribedBefore ? (
             <Redirect to={`/`} />
           ) : (
             <AuthLayout>

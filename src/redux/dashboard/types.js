@@ -1,3 +1,5 @@
 export const ActionTypes = {
   CURRENT_PAGE: "CURRENT_PAGE",
+  SET_STEP: "SET_STEP",
+  SHOW_VERIFY_EMAIL: "SHOW_VERIFY_EMAIL",
 };
