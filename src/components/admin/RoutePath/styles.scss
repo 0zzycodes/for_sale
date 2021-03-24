@@ -1,0 +1,31 @@
+@import "../../../constants/scss/colors";
+@import "../../../constants/scss/variables";
+@import "../../../constants/scss/mixins";
+
+.route {
+  position: relative;
+  height: 5.5em;
+  .arrow-back {
+    position: absolute;
+    left: 2em;
+    top: 1em;
+    cursor: pointer;
+    height: 3.5em;
+    width: 3.5em;
+    box-shadow: $shadow;
+    background-color: $white;
+    border-radius: 50%;
+  }
+  .route-path {
+    background-color: #151617ab;
+    min-width: 5em;
+    height: 2em;
+    padding: 0 1em;
+    border-radius: 2em;
+    .route-path-link-string {
+      color: $white;
+      font-size: 1.2em;
+      font-family: "FiraBold";
+    }
+  }
+}

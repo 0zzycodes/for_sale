@@ -1,0 +1,32 @@
+@import "../../../constants/scss/colors";
+@import "../../../constants/scss/variables";
+@import "../../../constants/scss/mixins";
+
+.overview-box {
+  cursor: pointer;
+  padding: 0 1em;
+  justify-content: space-around;
+  width: 20%;
+  min-height: 10em;
+  border-radius: 1em;
+  box-shadow: $shadow;
+  background-image: $darkGradientBackground;
+  &:nth-child(even) {
+    background-image: $lightGradientBackground;
+    .overview-box-info {
+      color: $black;
+    }
+  }
+  .overview-box-info {
+    text-align: center;
+    color: $white;
+    .count {
+      font-family: "FiraBold";
+      font-size: 1.9em;
+    }
+    .label {
+      font-family: "FiraRegular";
+      font-size: 1.5em;
+    }
+  }
+}

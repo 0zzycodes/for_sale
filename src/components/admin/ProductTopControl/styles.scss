@@ -1,0 +1,34 @@
+@import "../../../constants/scss/colors";
+@import "../../../constants/scss/variables";
+@import "../../../constants/scss/mixins";
+
+.products-top-control {
+  justify-content: space-between;
+  .products-top-controls-search {
+    .product-search-icon {
+      height: 3.4em;
+      width: 3.4em;
+      background-color: $white;
+      box-shadow: $shadow;
+      border-radius: 0.5em;
+    }
+    .product-search-input {
+      background: none;
+      background-color: $white;
+      color: $textColor;
+      font-family: "FiraBold";
+      font-size: 1.2em;
+      border-radius: 0.5em;
+      padding: 0.8em 0 0.8em 0.5em;
+      border: none;
+      outline: none;
+    }
+  }
+  .products-top-controls-buttons {
+    .products-top-controls-button {
+      height: 2.5em;
+      padding: 0 1.5em;
+      font-size: 1.3em;
+    }
+  }
+}

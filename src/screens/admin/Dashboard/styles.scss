@@ -1,0 +1,14 @@
+@import "../../../constants/scss/colors";
+@import "../../../constants/scss/variables";
+@import "../../../constants/scss/mixins";
+
+.admin-dashboard {
+  padding: 0 2em;
+  .overview {
+    justify-content: space-around;
+    .icon-replacer {
+      font-size: 3.5em;
+      color: $white;
+    }
+  }
+}

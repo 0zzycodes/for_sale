@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { AntDesign, Feather } from "react-web-vector-icons";
 import { useHistory } from "react-router-dom";
-import Spacing from "../../common/Spacing/Spacing";
 import { useSelector } from "react-redux";
 import { colors } from "../../../constants/Colors";
 import Dropdown from "../Dropdown/Dropdown";
@@ -22,7 +21,7 @@ const DashboardLayout = ({ children }) => {
   };
   return (
     <>
-      <div className="flex-horizontal-center dashboard">
+      <div className="flex-horizontal-center admin-dashboard-layout">
         <Sidebar sidebarCollapsed={sidebarCollapsed} />
         <main className={`main ${sidebarCollapsed && "mainExpand"}`}>
           <Navbar
@@ -31,10 +30,7 @@ const DashboardLayout = ({ children }) => {
             dropdownVisible={dropdownVisible}
             setDropdownVisible={setDropdownVisible}
           />
-          <div className="admin-children-container">
-            <Spacing height={"6em"} />
-            {children}
-          </div>
+          <div className="admin-children-container">{children}</div>
         </main>
       </div>
       <Dropdown

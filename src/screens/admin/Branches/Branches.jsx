@@ -1,10 +1,11 @@
 import React from "react";
+import RoutePath from "../../../components/admin/RoutePath/RoutePath";
 import "./styles.scss";
 
 const Branches = () => {
   return (
     <div>
-      <h1>Branches</h1>
+      <RoutePath route="/branches" />
     </div>
   );
 };

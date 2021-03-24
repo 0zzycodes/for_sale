@@ -23,7 +23,7 @@
     box-shadow: $shadow;
     .heading {
       padding: 2em 0;
-      background-color: $danger;
+      background-color: $warn;
       border-top-left-radius: 1em;
       border-top-right-radius: 1em;
 
@@ -78,7 +78,7 @@
           align-items: center;
           justify-content: space-evenly;
           text-align: center;
-          background-color: $tint;
+          background-color: $black;
           color: $white;
           box-sizing: border-box;
           border: none;

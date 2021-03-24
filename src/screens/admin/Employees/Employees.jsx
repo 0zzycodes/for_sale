@@ -1,10 +1,11 @@
 import React from "react";
+import RoutePath from "../../../components/admin/RoutePath/RoutePath";
 import "./styles.scss";
 
 const Employees = () => {
   return (
     <div>
-      <h1>Employees</h1>
+      <RoutePath route="/eployees" />
     </div>
   );
 };

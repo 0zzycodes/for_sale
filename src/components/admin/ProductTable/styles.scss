@@ -1,0 +1,24 @@
+@import "../../../constants/scss/colors";
+@import "../../../constants/scss/variables";
+@import "../../../constants/scss/mixins";
+
+.product-table {
+  .product-tabel-head {
+    width: 100%;
+    height: 5em;
+    justify-content: space-between;
+    border-radius: 0.5em;
+    // border-bottom: 0.1em solid lighten($color: $black, $amount: 50);
+
+    .product-tabel-head-text {
+      display: block;
+      width: calc(85% / 8);
+      margin-right: 0.2em;
+    }
+    .product-name {
+      margin-right: auto;
+      width: 15%;
+      padding-left: 1em;
+    }
+  }
+}

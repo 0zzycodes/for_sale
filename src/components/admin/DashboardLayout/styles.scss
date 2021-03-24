@@ -2,7 +2,7 @@
 @import "../../../constants/scss/variables";
 @import "../../../constants/scss/mixins";
 
-.dashboard {
+.admin-dashboard-layout {
   height: 100vh;
   width: 100vw;
   overflow: hidden;
@@ -15,10 +15,8 @@
 
     .admin-children-container {
       width: 100%;
-      height: calc(100vh - 8em);
-      padding-bottom: 2em;
+      height: calc(100vh - 7em);
       display: flex;
-      align-items: center;
       flex-direction: column;
       background-image: linear-gradient(#f5f6f7ec, #7b7b7ce7),
         url("../../../assets/icons/logo-icon-dark.svg");

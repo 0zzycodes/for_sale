@@ -11,31 +11,19 @@
 }
 .btn {
   cursor: pointer;
-  height: 2.5em;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   background-color: $black;
   color: $white;
+  height: 2.5em;
   border-radius: 3em;
   box-shadow: $shadow;
-  font-weight: 700 !important;
+  font-weight: 700;
   a {
-    font-size: 0.9em !important;
-    margin: 0 !important;
-    color: $white !important;
+    font-size: 0.9em;
+    margin: 0;
+    color: $white;
   }
-}
-.cta {
-  padding: 0 2em;
-  height: 3.5em;
-  width: 13em;
-  font-size: 1.2em;
-  box-shadow: $shadow;
-}
-.cta img {
-  height: 0.8em;
-  width: 0.8em;
-  margin-left: 0.8em;
 }

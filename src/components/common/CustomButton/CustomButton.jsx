@@ -1,8 +1,11 @@
 import React from "react";
 import "./styles.scss";
-const CustomButton = ({ label, className, onClick }) => {
+const CustomButton = ({ label, className, onClick, inverted }) => {
   return (
-    <button className={`btn ${className}`} onClick={onClick}>
+    <button
+      className={`custom-btn ${inverted && "inverted"} ${className}`}
+      onClick={onClick}
+    >
       {label}
     </button>
   );

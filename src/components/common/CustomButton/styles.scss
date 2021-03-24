@@ -2,28 +2,46 @@
 @import "../../../constants/scss/variables";
 @import "../../../constants/scss/mixins";
 
-.btn {
+.custom-btn {
+  cursor: pointer;
   width: auto;
   font-size: 15px;
-  background-color: $black !important;
+  background-image: $darkGradientBackground;
   color: $white;
   text-transform: capitalize;
   font-family: "FiraBold";
   border: none;
   padding: 1em 2em;
-  cursor: pointer;
   display: flex;
   justify-content: center;
-  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  align-items: center;
+  transition: $cubicTransition;
+  height: 2.5em;
+  border-radius: 3em;
+  box-shadow: $shadow;
   a {
     font-family: "FiraBold";
-    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: $cubicTransition;
   }
   &:hover {
-    background-image: linear-gradient(#f5f6f7ec, #7b7b7ce7) !important;
-    color: black;
+    background-image: $lightGradientBackground;
+    color: $black;
     a {
-      color: $black !important;
+      color: $black;
+    }
+  }
+}
+.inverted {
+  background-image: $lightGradientBackground;
+  color: $black;
+  a {
+    color: $black;
+  }
+  &:hover {
+    background-image: $darkGradientBackground;
+    color: $white !important;
+    a {
+      color: $white !important;
     }
   }
 }

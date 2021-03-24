@@ -3,6 +3,7 @@ import CustomButton from "../../../components/common/CustomButton/CustomButton";
 import CustomInput from "../../../components/common/CustomInput/CustomInput";
 import CustomPopUp from "../../../components/common/CustomPopUp/CustomPopUp";
 import Spacing from "../../../components/common/Spacing/Spacing";
+import Spinner from "../../../components/common/Spinner/Spinner";
 import { colors } from "../../../constants/Colors";
 import { auth } from "../../../firebase/config";
 import "./styles.scss";
@@ -47,7 +48,13 @@ const Login = () => {
       </div>
       <Spacing height="6em" />
       {loginAs === "admin" ? (
-        <AdminLogin setLoading={setLoading} />
+        loading ? (
+          <Spinner style={{ height: "20vh" }} />
+        ) : (
+          <AdminLogin setLoading={setLoading} />
+        )
+      ) : loading ? (
+        <Spinner style={{ height: "20vh" }} />
       ) : (
         <CashierLogin setLoading={setLoading} />
       )}
