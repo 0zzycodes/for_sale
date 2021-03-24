@@ -1,12 +1,12 @@
 import React from "react";
 import "./styles.scss";
 
-const Report = () => {
+const Branches = () => {
   return (
     <div>
-      <h1>Report</h1>
+      <h1>Branches</h1>
     </div>
   );
 };
 
-export default Report;
+export default Branches;

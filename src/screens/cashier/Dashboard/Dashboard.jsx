@@ -4,7 +4,7 @@ import "./styles.scss";
 const CashierDashboard = () => {
   return (
     <div>
-      <h1>Admin Dashboard</h1>
+      <h1>Cashier Dashboard</h1>
     </div>
   );
 };

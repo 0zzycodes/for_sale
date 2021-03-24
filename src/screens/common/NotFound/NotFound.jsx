@@ -1,13 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { Ionicons } from "react-web-vector-icons";
 import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
+import { colors } from "../../../constants/Colors";
 
 import "./styles.scss";
 
-const NotFound = ({ isShow, setIsShow }) => {
-  useEffect(() => {
-    setIsShow(true);
-  }, [setIsShow]);
-
+const NotFound = () => {
   return (
     <div className="notFound">
       <Helmet>
@@ -18,8 +17,8 @@ const NotFound = ({ isShow, setIsShow }) => {
         <meta property="og:site_name" content="Stoque" />
       </Helmet>
       <div className="notFoundContainer">
-        <div className="heading">
-          <h4>ICON</h4>
+        <div className="flex-center heading">
+          <Ionicons name="md-warning" size={70} color={colors.white} />
         </div>
         <div className="body">
           <h3 className="404">404 Page not found</h3>
@@ -27,10 +26,12 @@ const NotFound = ({ isShow, setIsShow }) => {
             Oopps. The page you were looking for doesn't exist.
           </span>
           <p className="suggestedReason">
-            You may have mistyped the address or the page may have moved.
+            You may have mistyped the address or the page might have been moved.
           </p>
           <div className="navigationButtons">
-            <button className="btn">Back to home</button>
+            <Link to="/">
+              <button className="btn">Back to home</button>
+            </Link>
           </div>
         </div>
       </div>

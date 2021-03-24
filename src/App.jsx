@@ -18,9 +18,14 @@ import NotFound from "./screens/common/NotFound/NotFound";
 // STYLES
 import "./App.scss";
 import AuthLayout from "./components/common/Layout/Layout";
+import DashboardLayout from "./components/admin/DashboardLayout/Layout";
+import Reports from "./screens/admin/Reports/Reports";
+import Products from "./screens/admin/Products/Products";
+import Employees from "./screens/admin/Employees/Employees";
+import Branches from "./screens/admin/Branches/Branches";
 
 const App = () => {
-  const currentUser = useSelector((state) => state.user.currentUser);
+  const currentUser = useSelector(({ user }) => user.currentUser);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const checkUser = useCallback(() => {
@@ -66,7 +71,9 @@ const App = () => {
         render={() => {
           if (currentUser && currentUser.hasSubcribedBefore) {
             return currentUser && currentUser.role === "admin" ? (
-              <AdminDashboard />
+              <DashboardLayout>
+                <AdminDashboard />
+              </DashboardLayout>
             ) : currentUser && currentUser.role === "cashier" ? (
               <CashierDashboard />
             ) : (
@@ -102,7 +109,61 @@ const App = () => {
           )
         }
       />
-      <Route render={() => <NotFound />} />
+      <Route
+        path="/products"
+        render={() =>
+          !currentUser ? (
+            <Redirect to={`/login`} />
+          ) : (
+            <DashboardLayout>
+              <Products />
+            </DashboardLayout>
+          )
+        }
+      />
+      <Route
+        path="/branches"
+        render={() =>
+          !currentUser ? (
+            <Redirect to={`/login`} />
+          ) : (
+            <DashboardLayout>
+              <Branches />
+            </DashboardLayout>
+          )
+        }
+      />
+      <Route
+        path="/employees"
+        render={() =>
+          !currentUser ? (
+            <Redirect to={`/login`} />
+          ) : (
+            <DashboardLayout>
+              <Employees />
+            </DashboardLayout>
+          )
+        }
+      />
+      <Route
+        path="/reports"
+        render={() =>
+          !currentUser ? (
+            <Redirect to={`/login`} />
+          ) : (
+            <DashboardLayout>
+              <Reports />
+            </DashboardLayout>
+          )
+        }
+      />
+      <Route
+        render={() => (
+          <AuthLayout notfound>
+            <NotFound />
+          </AuthLayout>
+        )}
+      />
     </Switch>
   );
 };

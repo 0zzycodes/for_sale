@@ -18,11 +18,11 @@
 
   .notFoundContainer {
     min-height: 25em;
-    width: 70%;
+    width: 50%;
     border-radius: 1em;
     box-shadow: $shadow;
     .heading {
-      padding: 4em 0;
+      padding: 2em 0;
       background-color: $danger;
       border-top-left-radius: 1em;
       border-top-right-radius: 1em;
@@ -63,11 +63,17 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        a {
+          display: block;
+          width: 70%;
+          margin: auto;
+        }
         .btn {
           cursor: pointer;
           height: 2.3em !important;
           padding: 0 !important;
           width: 70%;
+          margin: auto;
           display: flex;
           align-items: center;
           justify-content: space-evenly;
