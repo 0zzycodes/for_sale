@@ -4,7 +4,7 @@ import CustomButton from "../../common/CustomButton/CustomButton";
 import Spacing from "../../common/Spacing/Spacing";
 
 import "./styles.scss";
-const ProductTopControl = ({ setQuery }) => {
+const ProductTopControl = ({ setQuery, setDialogVisible, setType }) => {
   return (
     <div className="flex-vertical-center products-top-control">
       <div className="flex-vertical-center products-top-controls-search">
@@ -24,11 +24,19 @@ const ProductTopControl = ({ setQuery }) => {
           label="Add Category"
           inverted
           className="products-top-controls-button"
+          onClick={() => {
+            setType("category");
+            setDialogVisible(true);
+          }}
         />
         <Spacing width="1em" />
         <CustomButton
           label="Add Product"
           className="products-top-controls-button"
+          onClick={() => {
+            setType("product");
+            setDialogVisible(true);
+          }}
         />
       </div>
     </div>

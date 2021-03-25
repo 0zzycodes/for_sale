@@ -3,6 +3,8 @@
 @import "../../../constants/scss/mixins";
 
 .product-table {
+  overflow-y: scroll;
+  height: calc(100vh - 20em);
   .product-tabel-head {
     width: 100%;
     height: 5em;
@@ -12,8 +14,10 @@
 
     .product-tabel-head-text {
       display: block;
-      width: calc(85% / 8);
+      width: calc(85% / 7);
       margin-right: 0.2em;
+      font-size: 1.2em;
+      // border: 0.1em solid lighten($color: $black, $amount: 0);
     }
     .product-name {
       margin-right: auto;

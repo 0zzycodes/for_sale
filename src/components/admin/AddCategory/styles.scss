@@ -1,0 +1,32 @@
+@import "../../../constants/scss/colors";
+@import "../../../constants/scss/variables";
+@import "../../../constants/scss/mixins";
+
+.add-category {
+  width: 20vw;
+  border-radius: 0.5em;
+  padding: 2em;
+  flex-direction: column;
+  background-image: $lightGradientBackground;
+  .add-category-head {
+    width: 100%;
+    justify-content: space-between;
+    span {
+      font-family: "FiraBold";
+    }
+    .close-icon {
+      cursor: pointer;
+      height: 2.5em;
+      width: 2.5em;
+      background-color: $danger;
+      box-shadow: $shadow;
+      border-radius: 50%;
+    }
+  }
+  .group {
+    width: 100%;
+  }
+  .add-category-btn {
+    height: 2.2em;
+  }
+}

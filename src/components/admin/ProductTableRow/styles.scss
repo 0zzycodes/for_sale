@@ -7,23 +7,52 @@
   height: 4.5em;
   border-radius: 0.5em;
   justify-content: space-between;
-  //   border-bottom: 0.1em solid lighten($color: $black, $amount: 50);
+  margin-bottom: 1em;
   &:nth-child(odd) {
+    margin-bottom: 1em;
     background-color: lighten($color: $black, $amount: 50);
   }
 
   .product-table-row-text,
   .actions {
     display: block;
-    width: calc(85% / 8);
+    width: calc(85% / 7);
     margin-right: 0.2em;
     font-size: 1.2em;
+
     .action-icon {
       cursor: pointer;
       width: 2.8em;
       height: 2.8em;
       border-radius: 2em;
     }
+  }
+  .in-stock {
+    background-color: $success;
+    color: $white;
+    padding: 0.5em 1em;
+    font-size: 0.9em;
+    font-family: "FiraBold";
+    display: inline-block;
+    border-radius: 1em;
+  }
+  .running-low {
+    background-color: $warn;
+    color: $white;
+    padding: 0.5em 1em;
+    font-size: 0.9em;
+    font-family: "FiraBold";
+    display: inline-block;
+    border-radius: 1em;
+  }
+  .out-of-stock {
+    background-color: $danger;
+    color: $white;
+    padding: 0.5em 1em;
+    font-size: 0.9em;
+    font-family: "FiraBold";
+    display: inline-block;
+    border-radius: 1em;
   }
   .actions {
     display: flex;
