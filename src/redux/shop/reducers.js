@@ -1,15 +1,15 @@
 import { ActionTypes } from "./types";
 
 const INITIAL_STATE = {
-  currentCashier: null,
+  categories: [],
 };
 
 const shopReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case ActionTypes.SET_CURRENT_CASHIER:
+    case ActionTypes.SET_CATEGORIES:
       return {
         ...state,
-        currentCashier: action.payload,
+        categories: action.payload,
       };
     default:
       return state;

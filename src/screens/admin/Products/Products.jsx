@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import AddCategory from "../../../components/admin/AddCategory/AddCategory";
 import AddProduct from "../../../components/admin/AddProduct/AddProduct";
 import ProductTable from "../../../components/admin/ProductTable/ProductTable";
@@ -12,12 +13,39 @@ import CustomInput from "../../../components/common/CustomInput/CustomInput";
 import Dialog from "../../../components/common/Dialog/Dialog";
 import Spacing from "../../../components/common/Spacing/Spacing";
 import { DummyProducts } from "../../../constants/Products";
+import { firestore } from "../../../firebase/config";
+import { setCategories } from "../../../redux/shop/actions";
 import "./styles.scss";
 const Products = () => {
+  const currentUser = useSelector(({ user }) => user.currentUser);
   const [query, setQuery] = useState("");
   const [productData, setProductData] = useState();
   const [dialogVisible, setDialogVisible] = useState(false);
   const [type, setType] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const onLoadCategories = useCallback(async () => {
+    console.log("Start");
+    const categoryRef = firestore
+      .collection("categories")
+      .doc(currentUser.id)
+      .collection("categories");
+    categoryRef.onSnapshot((snapShot) => {
+      if (!snapShot.empty) {
+        const categoriesArray = [];
+        snapShot.forEach((item) => {
+          categoriesArray.push(item.data());
+        });
+        dispatch(setCategories(categoriesArray));
+        console.log(categoriesArray);
+        setLoading(false);
+      }
+    });
+  }, [currentUser.id, dispatch]);
+  useEffect(() => {
+    onLoadCategories();
+    return () => {};
+  }, [onLoadCategories]);
   return (
     <div className="admin-dashbord-products">
       <RoutePath route="/products" />

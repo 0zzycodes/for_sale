@@ -13,7 +13,7 @@ const SidebarLink = ({ to, icon, label, sidebarCollapsed }) => {
         className="flex-vertical-center sidebar-link"
         style={
           location.pathname === to
-            ? { borderRight: `0.3em solid ${colors.black}` }
+            ? { borderRight: `0.15em solid ${colors.black}` }
             : {}
         }
       >

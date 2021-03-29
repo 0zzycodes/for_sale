@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Ionicons, MaterialCommunityIcons } from "react-web-vector-icons";
 import CustomInput from "../../common/CustomInput/CustomInput";
 import CustomPopUp from "../../common/CustomPopUp/CustomPopUp";
@@ -9,12 +9,18 @@ import CustomButton from "../../common/CustomButton/CustomButton";
 
 import "./styles.scss";
 import { colors } from "../../../constants/Colors";
+import FormSelect from "../FormSelect/FormSelect";
+import { CreateProduct } from "../../../firebase/firestore";
+import { firestore } from "../../../firebase/config";
+import { GenerateRandomNDigits } from "../../../utils/helper";
 const AddProduct = ({ setDialogVisible }) => {
-  const currentUser = useSelector((state) => state.user.currentUser);
-
+  const currentUser = useSelector(({ user }) => user.currentUser);
+  const categories = useSelector(({ shop }) => shop.categories);
   const [scanning, setScanning] = useState(false);
+  const [selectedBracnch, setSelectedBranch] = useState({});
   const [loading, setLoading] = useState(false);
   const [barcode, setBarcode] = useState("");
+  const [category, setCategory] = useState("");
   const [productName, setProductName] = useState("");
   const [price, setPrice] = useState("");
   const [quantity, setQuantity] = useState("");
@@ -24,29 +30,93 @@ const AddProduct = ({ setDialogVisible }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const onScan = () => {
     setScanning(!scanning);
+    const barcodeRef = firestore
+      .collection("barcode")
+      .doc(currentUser.id)
+      .collection("codes")
+      .doc("line_one");
+    barcodeRef.onSnapshot((snapShot) => {
+      // console.log(snapShot.data());
+      if (snapShot.data()) {
+        setBarcode(snapShot.data().barcode);
+      }
+    });
   };
-  const onSubmit = async (e) => {
+  const refactorCode = useCallback(() => {
+    setErrorMessage("");
+
+    setProfit((price - cost) * quantity);
+  }, [price, cost, quantity]);
+
+  useEffect(() => {
+    refactorCode();
+  }, [price, cost, quantity, refactorCode]);
+
+  const onCreateProduct = async (productData) => {
+    try {
+      await CreateProduct(productData, currentUser.id);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+    }
+  };
+  function regenerateId() {
+    checkIfProductIdExist();
+  }
+
+  async function checkIfProductIdExist(e) {
     setLoading(true);
     e.preventDefault();
+    const id = GenerateRandomNDigits(5);
     if (
-      barcode.trim() === "" ||
       productName.trim() === "" ||
       cost.trim() === "" ||
       price.trim() === "" ||
       quantity.trim() === "" ||
-      profit.trim() === "" ||
       notification.trim() === ""
     ) {
       setLoading(false);
       setErrorMessage(`All fields are required!`);
       return;
     }
-    try {
+    const productRef = await firestore
+      .collection("products")
+      .doc(currentUser.id)
+      .collection("branch")
+      .doc(selectedBracnch.id)
+      .collection("products")
+      .where("id", "==", `${id}`);
+    const snapshot = await productRef.get();
+    if (snapshot.docs.length > 0) {
+      setErrorMessage(
+        "Id already existed so we are trying agin with another id"
+      );
+      regenerateId();
       setLoading(false);
-    } catch (error) {
-      setLoading(false);
+      return;
     }
-  };
+
+    const productData = {
+      id: id,
+      category,
+      barcode,
+      product_name: productName,
+      price,
+      cost,
+      quantity,
+      profit: (price - cost) * quantity,
+      notification,
+      created_at: Date.now(),
+      last_restock_date: Date.now(),
+      last_restock_quantity: quantity,
+      product_sold_since_last_restock: 0,
+      archived: false,
+      status: "In Stock",
+    };
+
+    onCreateProduct(productData);
+  }
+
   return (
     <>
       {loading ? (
@@ -64,7 +134,7 @@ const AddProduct = ({ setDialogVisible }) => {
           </div>
           <Spacing height="3em" />
           <form
-            onSubmit={(e) => onSubmit(e)}
+            onSubmit={(e) => checkIfProductIdExist(e)}
             className="add-product-form-container"
           >
             {errorMessage !== "" ? (
@@ -106,7 +176,10 @@ const AddProduct = ({ setDialogVisible }) => {
                 label="Cost"
                 value={cost}
                 type="number"
-                onChange={({ target }) => setCost(target.value)}
+                onChange={({ target }) => {
+                  setCost(target.value);
+                  refactorCode();
+                }}
               />
             </div>
             <Spacing height="2em" />
@@ -115,18 +188,23 @@ const AddProduct = ({ setDialogVisible }) => {
                 label="Price"
                 value={price}
                 type="number"
-                onChange={({ target }) => setPrice(target.value)}
+                onChange={({ target }) => {
+                  setPrice(target.value);
+                  refactorCode();
+                }}
               />
               <Spacing width="2em" />
               <CustomInput
                 label="Quantity"
                 value={quantity}
                 type="number"
-                onChange={({ target }) => setQuantity(target.value)}
+                onChange={({ target }) => {
+                  setQuantity(target.value);
+                  refactorCode();
+                }}
               />
             </div>
             <Spacing height="2em" />
-
             <div className="flex-vertical-center inputGrouping">
               <CustomInput
                 label="Profit"
@@ -143,10 +221,20 @@ const AddProduct = ({ setDialogVisible }) => {
                 onChange={({ target }) => setNotification(target.value)}
               />
             </div>
+            <Spacing height="2em" />
+            <FormSelect
+              label="Category"
+              options={categories}
+              value={category}
+              onChange={({ target }) => {
+                console.log(target.value);
+                setCategory(target.value);
+              }}
+            />
             <Spacing height="3em" />
             <CustomButton
               label="Add"
-              onClick={(e) => onSubmit(e)}
+              onClick={(e) => checkIfProductIdExist(e)}
               className="add-product-btn"
             />
           </form>

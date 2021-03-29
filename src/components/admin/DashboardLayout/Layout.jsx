@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { AntDesign, Feather } from "react-web-vector-icons";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { auth } from "../../../firebase/config";
 import { colors } from "../../../constants/Colors";
 import Dropdown from "../Dropdown/Dropdown";
 import Sidebar from "../Sidebar/Sidebar";
@@ -15,9 +16,10 @@ const DashboardLayout = ({ children }) => {
 
   const history = useHistory();
   const onLogout = () => {
-    sessionStorage.setItem("reauthenticate", JSON.stringify({ status: false }));
+    // sessionStorage.setItem("reauthenticate", JSON.stringify({ status: false }));
     setDropdownVisible(false);
-    history.push(`/dashboard/${currentUser.id}`);
+    auth.signOut();
+    history.push(`/login`);
   };
   return (
     <>
@@ -41,6 +43,7 @@ const DashboardLayout = ({ children }) => {
         <div
           className="dropdownLink"
           onClick={() => {
+            history.push("/settings");
             setDropdownVisible(false);
           }}
         >

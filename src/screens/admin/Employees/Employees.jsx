@@ -5,7 +5,7 @@ import "./styles.scss";
 const Employees = () => {
   return (
     <div>
-      <RoutePath route="/eployees" />
+      <RoutePath route="/employees" />
     </div>
   );
 };

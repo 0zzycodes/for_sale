@@ -3,8 +3,19 @@
 @import "../../../constants/scss/mixins";
 
 .add-category {
-  width: 20vw;
-  border-radius: 0.5em;
+  width: 32vw;
+  border-radius: 1em;
+  margin-top: auto;
+  @include small-laptop() {
+    width: 50vw;
+  }
+  @include tablet() {
+    width: 60vw;
+  }
+  @include smartphone() {
+    width: 90vw;
+  }
+  // border-radius: 0.5em;
   padding: 2em;
   flex-direction: column;
   background-image: $lightGradientBackground;
@@ -26,7 +37,7 @@
   .group {
     width: 100%;
   }
-  .category-code {
+  .branch-code {
     align-items: flex-end;
     width: 100%;
     .group {

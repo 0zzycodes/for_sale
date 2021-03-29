@@ -1,0 +1,45 @@
+@import "../../../constants/scss/colors";
+@import "../../../constants/scss/variables";
+@import "../../../constants/scss/mixins";
+
+.popup-container {
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transform: translateY(100px) translateX(50px) scale(1.3);
+  position: fixed;
+  z-index: 2;
+  max-width: 16em;
+  width: 100%;
+  background-color: $white;
+  display: flex;
+  box-shadow: $shadow;
+  border-radius: 1em;
+}
+.branch-list {
+  border-radius: 1em;
+  .branch-preview {
+    cursor: pointer;
+    color: $white;
+    background-image: $darkGradientBackground;
+    width: 20%;
+    padding: 1em;
+    border-radius: 0.5em;
+    box-shadow: $shadow;
+    margin-right: 2em;
+    text-align: center;
+    .branch-icon {
+      height: 6em;
+      width: 6em;
+      border-radius: 0.5em;
+      background-image: $lightGradientBackground;
+      box-shadow: $shadow;
+    }
+  }
+}
+
+.show {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0px) translateX(0px) scale(1);
+}

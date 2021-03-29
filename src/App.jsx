@@ -23,6 +23,7 @@ import Reports from "./screens/admin/Reports/Reports";
 import Products from "./screens/admin/Products/Products";
 import Employees from "./screens/admin/Employees/Employees";
 import Branches from "./screens/admin/Branches/Branches";
+import Settings from "./screens/admin/Settings/Settings";
 
 const App = () => {
   const currentUser = useSelector(({ user }) => user.currentUser);
@@ -153,6 +154,18 @@ const App = () => {
           ) : (
             <DashboardLayout>
               <Reports />
+            </DashboardLayout>
+          )
+        }
+      />
+      <Route
+        path="/settings"
+        render={() =>
+          !currentUser ? (
+            <Redirect to={`/login`} />
+          ) : (
+            <DashboardLayout>
+              <Settings />
             </DashboardLayout>
           )
         }

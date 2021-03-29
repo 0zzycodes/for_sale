@@ -47,7 +47,7 @@ const Sidebar = ({ sidebarCollapsed }) => {
           label="Dashboard"
           sidebarCollapsed={sidebarCollapsed}
         />
-        <Spacing height="3em" />
+        <Spacing height="3.5em" />
         <SidebarLink
           to="/products"
           icon={
@@ -61,7 +61,7 @@ const Sidebar = ({ sidebarCollapsed }) => {
           label="Products"
           sidebarCollapsed={sidebarCollapsed}
         />
-        <Spacing height="3em" />
+        <Spacing height="3.5em" />
         <SidebarLink
           to="/branches"
           icon={
@@ -75,7 +75,7 @@ const Sidebar = ({ sidebarCollapsed }) => {
           label="Branches"
           sidebarCollapsed={sidebarCollapsed}
         />
-        <Spacing height="3em" />
+        <Spacing height="3.5em" />
         <SidebarLink
           to="/employees"
           icon={
@@ -89,7 +89,7 @@ const Sidebar = ({ sidebarCollapsed }) => {
           label="Employees"
           sidebarCollapsed={sidebarCollapsed}
         />
-        <Spacing height="3em" />
+        <Spacing height="3.5em" />
         <SidebarLink
           to="/reports"
           icon={

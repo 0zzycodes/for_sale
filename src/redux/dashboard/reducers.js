@@ -4,9 +4,10 @@ const INITIAL_STATE = {
   currentPage: "dashboard",
   step: 1,
   showVerifyEmail: false,
+  branch: null,
 };
 
-const DashboardReducer = (state = INITIAL_STATE, action) => {
+const dashboardReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ActionTypes.CURRENT_PAGE:
       return {
@@ -23,9 +24,14 @@ const DashboardReducer = (state = INITIAL_STATE, action) => {
         ...state,
         showVerifyEmail: action.payload,
       };
+    case ActionTypes.SET_CURRENT_BRANCH:
+      return {
+        ...state,
+        branch: action.payload,
+      };
     default:
       return state;
   }
 };
 
-export default DashboardReducer;
+export default dashboardReducer;

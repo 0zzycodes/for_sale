@@ -12,3 +12,7 @@ export const setShowVerifyEmail = (status) => ({
   type: ActionTypes.SHOW_VERIFY_EMAIL,
   payload: status,
 });
+export const setBranch = (data) => ({
+  type: ActionTypes.SET_CURRENT_BRANCH,
+  payload: data,
+});
