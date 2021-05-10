@@ -1,3 +1,4 @@
 export const ActionTypes = {
   SET_CATEGORIES: "SET_CATEGORIES",
+  SET_EMPLOYEES: "SET_EMPLOYEES",
 };

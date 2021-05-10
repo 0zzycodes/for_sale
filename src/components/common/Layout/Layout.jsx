@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import Clock from "../Clock/Clock";
 import logo from "../../../assets/images/logo.png";
 import Spacing from "../Spacing/Spacing";
 import "./styles.scss";
@@ -15,13 +16,8 @@ const AuthLayout = ({ children, notfound }) => {
               <img src={logo} alt="Stoque logo" className="logo" />
             </Link>
           </div>
-          <span className="btn">
-            <Link
-              className="nav-link"
-              to={location.pathname === `/login` ? `/register` : `/login`}
-            >
-              {location.pathname === `/login` ? "Register" : "Login"}
-            </Link>
+          <span className="time">
+            <Clock />
           </span>
         </nav>
       )}

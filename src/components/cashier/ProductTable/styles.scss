@@ -1,0 +1,28 @@
+@import "../../../constants/scss/colors";
+@import "../../../constants/scss/variables";
+@import "../../../constants/scss/mixins";
+
+.product-table {
+  overflow-y: scroll;
+  height: calc(100vh - 20em);
+  .product-tabel-head {
+    width: 100%;
+    height: 5em;
+    justify-content: space-between;
+    border-radius: 0.5em;
+    // border-bottom: 0.1em solid lighten($color: $black, $amount: 50);
+
+    .product-tabel-head-text {
+      display: block;
+      width: calc(85% / 7);
+      margin-right: 0.2em;
+      font-size: 1.2em;
+      // border: 0.1em solid lighten($color: $black, $amount: 0);
+    }
+    .product-name {
+      margin-right: auto;
+      width: 15%;
+      padding-left: 1em;
+    }
+  }
+}

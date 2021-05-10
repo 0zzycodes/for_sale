@@ -12,17 +12,18 @@ import Spinner from "./components/common/Spinner/Spinner";
 import AdminDashboard from "./screens/admin/Dashboard/Dashboard";
 import CashierDashboard from "./screens/cashier/Dashboard/Dashboard";
 import Login from "./screens/common/Login/Login";
-import Register from "./screens/common/Register/Register";
 import NotFound from "./screens/common/NotFound/NotFound";
+import MakeSale from "./screens/cashier/MakeSale/MakeSale";
 
 // STYLES
 import "./App.scss";
 import AuthLayout from "./components/common/Layout/Layout";
 import DashboardLayout from "./components/admin/DashboardLayout/Layout";
+import CashierDashboardLayout from "./components/cashier/Layout/Layout";
 import Reports from "./screens/admin/Reports/Reports";
 import Products from "./screens/admin/Products/Products";
 import Employees from "./screens/admin/Employees/Employees";
-import Branches from "./screens/admin/Branches/Branches";
+import Notifications from "./screens/admin/Notifications/Notifications";
 import Settings from "./screens/admin/Settings/Settings";
 
 const App = () => {
@@ -70,42 +71,31 @@ const App = () => {
         exact
         path="/"
         render={() => {
-          if (currentUser && currentUser.hasSubcribedBefore) {
+          if (currentUser) {
             return currentUser && currentUser.role === "admin" ? (
               <DashboardLayout>
                 <AdminDashboard />
               </DashboardLayout>
             ) : currentUser && currentUser.role === "cashier" ? (
-              <CashierDashboard />
+              <CashierDashboardLayout>
+                <CashierDashboard />
+              </CashierDashboardLayout>
             ) : (
               <Redirect to={`/login`} />
             );
           } else {
-            return <Redirect to={`/register`} />;
+            return <Redirect to={`/login`} />;
           }
         }}
       />
       <Route
         path="/login"
         render={() =>
-          currentUser && currentUser.hasSubcribedBefore ? (
+          currentUser ? (
             <Redirect to={`/`} />
           ) : (
             <AuthLayout>
               <Login />
-            </AuthLayout>
-          )
-        }
-      />
-
-      <Route
-        path="/register"
-        render={() =>
-          currentUser && currentUser.hasSubcribedBefore ? (
-            <Redirect to={`/`} />
-          ) : (
-            <AuthLayout>
-              <Register />
             </AuthLayout>
           )
         }
@@ -123,18 +113,6 @@ const App = () => {
         }
       />
       <Route
-        path="/branches"
-        render={() =>
-          !currentUser ? (
-            <Redirect to={`/login`} />
-          ) : (
-            <DashboardLayout>
-              <Branches />
-            </DashboardLayout>
-          )
-        }
-      />
-      <Route
         path="/employees"
         render={() =>
           !currentUser ? (
@@ -143,6 +121,21 @@ const App = () => {
             <DashboardLayout>
               <Employees />
             </DashboardLayout>
+          )
+        }
+      />
+      <Route
+        exact
+        path={`/make-sale`}
+        render={() =>
+          !currentUser ? (
+            <Redirect to={`/login`} />
+          ) : (
+            currentUser.role === "cashier" && (
+              <CashierDashboardLayout>
+                <MakeSale />
+              </CashierDashboardLayout>
+            )
           )
         }
       />
@@ -166,6 +159,18 @@ const App = () => {
           ) : (
             <DashboardLayout>
               <Settings />
+            </DashboardLayout>
+          )
+        }
+      />
+      <Route
+        path="/notifications"
+        render={() =>
+          !currentUser ? (
+            <Redirect to={`/login`} />
+          ) : (
+            <DashboardLayout>
+              <Notifications />
             </DashboardLayout>
           )
         }

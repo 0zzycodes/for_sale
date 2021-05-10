@@ -1,0 +1,25 @@
+@import "../../../constants/scss/colors";
+@import "../../../constants/scss/variables";
+@import "../../../constants/scss/mixins";
+
+.sidebar {
+  width: 18%;
+  padding: 0 1em;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  .logo-container {
+    height: 7em;
+    .logo {
+      width: 8em;
+      transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    .logoIcon {
+      width: 3em;
+    }
+  }
+  .sidebar-links {
+    padding: 2em 0;
+  }
+}
+.sidebarCollapsed {
+  width: 6%;
+}

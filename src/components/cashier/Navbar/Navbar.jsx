@@ -1,6 +1,5 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { AntDesign, FontAwesome, Ionicons } from "react-web-vector-icons";
 import { colors } from "../../../constants/Colors";
 
@@ -13,7 +12,6 @@ const Navbar = ({
   setDropdownVisible,
 }) => {
   const currentUser = useSelector(({ user }) => user.currentUser);
-  const history = useHistory();
   return (
     <nav className="flex-vertical-center admin-navbar">
       <div className="toggler">
@@ -34,14 +32,9 @@ const Navbar = ({
         )}
       </div>
       <div className="notification-user">
-        <div
-          className="notification"
-          onClick={() => {
-            history.push("notifications");
-          }}
-        >
-          <Ionicons name="md-notifications" size={30} color={colors.black} />
-          <span className="notification-count">{0}</span>
+        <div className="notification" onClick={() => {}}>
+          {/* <Ionicons name="md-notifications" size={30} color={colors.black} />
+          <span className="notification-count">{0}</span> */}
         </div>
         <div
           className="user"

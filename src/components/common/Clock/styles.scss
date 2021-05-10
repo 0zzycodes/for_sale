@@ -1,0 +1,29 @@
+@import "../../../constants/scss/colors";
+@import "../../../constants/scss/variables";
+@import "../../../constants/scss/mixins";
+
+.clock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.time {
+  padding-left: 2em;
+  letter-spacing: 0.4em;
+  border-radius: 10px;
+  .hr-min {
+    font-size: 1.5em !important;
+  }
+  .sec {
+    font-size: 0.5em !important;
+    color: $black;
+  }
+}
+
+@media (max-width: 600px) {
+  .time {
+    padding: 0;
+    border: none;
+  }
+}

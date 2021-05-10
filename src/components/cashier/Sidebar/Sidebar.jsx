@@ -26,14 +26,6 @@ const Sidebar = ({ sidebarCollapsed }) => {
         </Link>
       </div>
       <div className="sidebar-links">
-        {/* 
-          Dashboard
-          Products
-          Branches
-          Employees
-          Sales
-          Reports
-           */}
         <SidebarLink
           to="/"
           icon={
@@ -48,47 +40,6 @@ const Sidebar = ({ sidebarCollapsed }) => {
           sidebarCollapsed={sidebarCollapsed}
         />
         <Spacing height="3.5em" />
-        <SidebarLink
-          to="/products"
-          icon={
-            <Entypo
-              name="box"
-              size={sidebarCollapsed ? 28 : 24}
-              color="black"
-              className={`sidebar-link-icon`}
-            />
-          }
-          label="Products"
-          sidebarCollapsed={sidebarCollapsed}
-        />
-        <Spacing height="3.5em" />
-        <SidebarLink
-          to="/employees"
-          icon={
-            <FontAwesome
-              name="users"
-              size={sidebarCollapsed ? 28 : 24}
-              color="black"
-              className={`sidebar-link-icon`}
-            />
-          }
-          label="Employees"
-          sidebarCollapsed={sidebarCollapsed}
-        />
-        <Spacing height="3.5em" />
-        <SidebarLink
-          to="/reports"
-          icon={
-            <MaterialCommunityIcons
-              name="notebook"
-              size={sidebarCollapsed ? 28 : 24}
-              color="black"
-              className={`sidebar-link-icon`}
-            />
-          }
-          label="Reports"
-          sidebarCollapsed={sidebarCollapsed}
-        />
       </div>
     </aside>
   );

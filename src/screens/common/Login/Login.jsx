@@ -1,11 +1,13 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setCurrentUser } from "../../..//redux/user/actions";
 import CustomButton from "../../../components/common/CustomButton/CustomButton";
 import CustomInput from "../../../components/common/CustomInput/CustomInput";
 import CustomPopUp from "../../../components/common/CustomPopUp/CustomPopUp";
 import Spacing from "../../../components/common/Spacing/Spacing";
 import Spinner from "../../../components/common/Spinner/Spinner";
 import { colors } from "../../../constants/Colors";
-import { auth } from "../../../firebase/config";
+import { auth, firestore } from "../../../firebase/config";
 import "./styles.scss";
 
 const Login = () => {
@@ -69,8 +71,8 @@ const AdminLogin = ({ setLoading }) => {
   const [passcode, setPasscode] = useState();
   const [errorMessage, setErrorMessage] = useState("");
   const onSubmit = async (e) => {
-    e.preventDefault();
     setLoading(true);
+    e.preventDefault();
     try {
       await auth.signInWithEmailAndPassword(email, passcode);
       setEmail("");
@@ -120,29 +122,39 @@ const AdminLogin = ({ setLoading }) => {
   );
 };
 const CashierLogin = ({ setLoading }) => {
-  const [shopCode, setShopCode] = useState();
-  const [branch, setBranch] = useState();
-  const [username, setUsername] = useState();
+  const dispatch = useDispatch();
+  const [phone, setPhone] = useState();
   const [passcode, setPasscode] = useState();
   const [errorMessage, setErrorMessage] = useState("");
   const onSubmit = async (e) => {
     e.preventDefault();
+    setErrorMessage("");
+    if (phone === "" || passcode === "") {
+      setErrorMessage("All fields are required");
+      return;
+    }
+    setLoading(true);
+    onLogUserIn();
+  };
+  const onLogUserIn = async () => {
     setLoading(true);
     try {
-      // TODO: Send Cashier login request login to cashier login endpoint
-      setShopCode("");
-      setBranch("");
-      setUsername("");
-      setPasscode("");
+      const employeeRef = firestore.collection(`employees`);
+      employeeRef
+        .where("passcode", "==", passcode * 1)
+        .where("phone", "==", `${phone}`)
+        .onSnapshot((snapShot) => {
+          if (snapShot.empty) {
+            setErrorMessage("Incorrect credentials");
+            return;
+          }
+          dispatch(setCurrentUser(snapShot.docs[0].data()));
+          setPhone("");
+          setPasscode("");
+        });
       setLoading(false);
     } catch (error) {
-      error.code === "auth/wrong-password"
-        ? setErrorMessage("The password is invalid")
-        : error.code === "auth/user-not-found"
-        ? setErrorMessage(
-            "There is no user record corresponding to this identifier."
-          )
-        : setErrorMessage("Shit just got real");
+      setErrorMessage("An error occured");
       setLoading(false);
     }
   };
@@ -158,28 +170,11 @@ const CashierLogin = ({ setLoading }) => {
         />
       ) : null}
       <Spacing height="2em" />
-      <div className="flex-horizontal-center inputGrouping">
-        <CustomInput
-          label="Shop code"
-          value={shopCode}
-          type={"number"}
-          onChange={({ target }) => setShopCode(target.value)}
-        />
-        <Spacing height="2em" />
-        <CustomInput
-          label="Branch code"
-          value={branch}
-          type={"number"}
-          onChange={({ target }) => setBranch(target.value)}
-        />
-      </div>
-
-      <Spacing height="2em" />
       <CustomInput
-        label="Username"
-        value={username}
-        type={"username"}
-        onChange={({ target }) => setUsername(target.value)}
+        label="Phone number"
+        value={phone}
+        type={"number"}
+        onChange={({ target }) => setPhone(target.value)}
       />
       <Spacing height="2em" />
       <CustomInput

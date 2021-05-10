@@ -1,0 +1,42 @@
+@import "../../../constants/scss/colors";
+@import "../../../constants/scss/variables";
+@import "../../../constants/scss/mixins";
+
+.scan-code {
+  position: relative;
+  width: 100%;
+  box-shadow: $shadow;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 20px;
+  border-radius: 1.5em;
+  .title {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 2em;
+    line-height: 29px;
+    color: $black;
+    text-align: center;
+  }
+  .buttons-l {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      margin-left: 10px;
+      width: 20px;
+      height: 20px;
+    }
+
+    button {
+      margin-bottom: 10px;
+      span {
+        font-weight: 500;
+      }
+    }
+  }
+}

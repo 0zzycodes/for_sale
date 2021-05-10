@@ -1,0 +1,75 @@
+@import "../../../constants/scss/colors";
+@import "../../../constants/scss/variables";
+@import "../../../constants/scss/mixins";
+
+.admin-navbar {
+  height: 7em;
+  justify-content: space-between;
+  padding: 0 2em;
+  //   border-bottom: 0.1em solid $danger;
+  .toggler {
+    .menu-holder {
+      cursor: pointer;
+    }
+  }
+  .notification-user {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    padding: 0 20px;
+
+    .notification {
+      padding-top: 5px;
+      margin-left: auto;
+      position: relative;
+      cursor: pointer;
+      img {
+        margin: auto;
+        width: 25px;
+        height: 25px;
+      }
+      .notification-count {
+        position: absolute;
+        top: -0.8em;
+        right: -0.4em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: $shadow;
+        width: 1.3em;
+        height: 1.3em;
+        border-radius: 50%;
+        font-size: 1.3em;
+        font-weight: 600;
+        line-height: 0;
+        margin-top: 1em;
+        background-color: $danger;
+        color: $white;
+      }
+    }
+    .user {
+      margin-left: 30px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      .avatar-container {
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+        margin-right: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      span {
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-shadow: $t-shadow;
+        color: lighten($color: $black, $amount: 20);
+      }
+    }
+  }
+}
