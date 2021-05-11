@@ -6,6 +6,7 @@
   justify-content: space-between;
   .products-top-controls-search {
     .product-search-icon {
+      cursor: pointer;
       height: 3.4em;
       width: 3.4em;
       background-color: $white;

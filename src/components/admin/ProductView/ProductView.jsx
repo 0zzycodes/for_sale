@@ -13,14 +13,14 @@ const ProductView = ({
   setDialogVisible,
   setProductData,
   data,
-  data: { category, status, id },
+  data: { category, id },
 }) => {
   const currentUser = useSelector((state) => state.user.currentUser);
 
   const [restocking, setRestocking] = useState(false);
   const [loading, setLoading] = useState(false);
   const [barcode, setBarcode] = useState(data.barcode);
-  const [productName, setProductName] = useState(data.name);
+  const [productName, setProductName] = useState(data.product_name);
   const [price, setPrice] = useState(data.price);
   const [quantity, setQuantity] = useState(data.quantity);
   const [cost, setCost] = useState(data.cost);
@@ -63,14 +63,18 @@ const ProductView = ({
               #{barcode || id} &mdash;{" "}
               <span
                 className={`${
-                  status === "In Stock"
+                  quantity > notification
                     ? "in-stock"
-                    : status === "Running Low"
+                    : quantity < notification
                     ? "running-low"
                     : "out-of-stock"
                 }`}
               >
-                {status}
+                {quantity > notification
+                  ? "In-stock"
+                  : quantity < notification
+                  ? "Running-low"
+                  : "Out-of-stock"}
               </span>
             </span>
             <div className="flex-center close-icon" onClick={onCloseView}>

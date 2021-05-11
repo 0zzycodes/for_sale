@@ -1,27 +1,8 @@
 import { firestore } from "./config";
-
-export const CreateBranch = async (data) => {
-  const { name, storeName, address, ownerId, branchCode } = data;
-  const branchRef = firestore.doc(`stores/${ownerId}/branches/${branchCode}`);
-  const shopData = {
-    id: branchCode,
-    storeName,
-    branchCode,
-    name,
-    address,
-  };
-  try {
-    await branchRef.set(shopData);
-  } catch (error) {
-    console.log("error creating branch", error.message);
-  }
-};
 export const CreateCategory = async (data) => {
-  const { category, id, ownerId } = data;
+  const { category, id } = data;
   console.log(data);
-  const categoryRef = firestore.doc(
-    `categories/${ownerId}/categories/${category.toLowerCase()}`
-  );
+  const categoryRef = firestore.doc(`categories/${category.toLowerCase()}`);
   const categoryData = {
     id,
     label: category,
@@ -32,33 +13,11 @@ export const CreateCategory = async (data) => {
     console.log("error creating category", error.message);
   }
 };
-export const CreateProduct = async (data, ownerId) => {
-  const { productId, branchId } = data;
-  console.log(data);
-
-  const categoryRef = firestore.doc(
-    `products/${ownerId}/branch/${branchId}/products/${productId}`
-  );
+export const CreateProduct = async (data) => {
+  const productRef = firestore.doc(`products/${data.query}`);
   try {
-    // await categoryRef.set(data);
+    await productRef.set(data);
   } catch (error) {
     console.log("error creating category", error.message);
-  }
-};
-export const CreateEmployee = async (data) => {
-  const { name, storeName, address, ownerId, branchCode, type, id } = data;
-  const employeeRef = firestore.doc(`employees/${ownerId}/${type}/${id}`);
-  const employeeData = {
-    id,
-    storeName,
-    storeId: ownerId,
-    branchCode,
-    name,
-    address,
-  };
-  try {
-    await employeeRef.set(employeeData);
-  } catch (error) {
-    console.log("error creating shop", error.message);
   }
 };

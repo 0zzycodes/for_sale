@@ -2,11 +2,17 @@ import React from "react";
 
 import "./styles.scss";
 
-const CustomInput = ({ onChange, label, ...otherProps }) => {
+const CustomInput = ({ style, disabled, onChange, label, ...otherProps }) => {
   return (
-    <div className="group">
+    <div className="group" style={style}>
       <label className={`form-input-label`}>{label}</label>
-      <input onChange={onChange} className="form-input" {...otherProps} />
+      <input
+        onChange={onChange}
+        className="form-input"
+        style={disabled ? { cursor: "not-allowed" } : {}}
+        {...otherProps}
+        disabled={disabled}
+      />
     </div>
   );
 };

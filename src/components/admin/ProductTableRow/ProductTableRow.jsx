@@ -8,7 +8,16 @@ const ProductTableRow = ({
   setProductData,
   setType,
   data,
-  data: { name, barcode, category, quantity, cost, price, status },
+  data: {
+    product_name,
+    barcode,
+    category,
+    quantity,
+    cost,
+    price,
+    status,
+    notification,
+  },
 }) => {
   const onViewProduct = () => {
     setType("productView");
@@ -17,23 +26,31 @@ const ProductTableRow = ({
   };
   return (
     <div className="flex-vertical-center product-table-row">
-      <span className="product-table-row-text product-name">{name}</span>
-      <span className="product-table-row-text code">{barcode}</span>
+      <span className="product-table-row-text product-name">
+        {product_name}
+      </span>
+      <span className="product-table-row-text code">
+        {barcode ? barcode : "null"}
+      </span>
       <span className="product-table-row-text category">{category}</span>
       <span className="product-table-row-text quantity">{quantity}</span>
-      <span className="product-table-row-text cost">{cost}</span>
-      <span className="product-table-row-text price">{price}</span>
+      <span className="product-table-row-text cost">₦{cost}</span>
+      <span className="product-table-row-text price">₦{price}</span>
       <span className={`product-table-row-text status`}>
         <span
           className={`${
-            status === "In Stock"
+            quantity > notification
               ? "in-stock"
-              : status === "Running Low"
+              : quantity < notification
               ? "running-low"
               : "out-of-stock"
           }`}
         >
-          {status}
+          {quantity > notification
+            ? "In-stock"
+            : quantity < notification
+            ? "Running-low"
+            : "Out-of-stock"}
         </span>
       </span>
       <div className="actions">

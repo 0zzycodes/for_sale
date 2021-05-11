@@ -8,10 +8,9 @@ import ProductTopControl from "../../../components/admin/ProductTopControl/Produ
 import ProductView from "../../../components/admin/ProductView/ProductView";
 // import { Ionicons } from "react-web-vector-icons";
 import RoutePath from "../../../components/admin/RoutePath/RoutePath";
-import CustomButton from "../../../components/common/CustomButton/CustomButton";
-import CustomInput from "../../../components/common/CustomInput/CustomInput";
 import Dialog from "../../../components/common/Dialog/Dialog";
 import Spacing from "../../../components/common/Spacing/Spacing";
+import Spinner from "../../../components/common/Spinner/Spinner";
 import { DummyProducts } from "../../../constants/Products";
 import { firestore } from "../../../firebase/config";
 import { setCategories } from "../../../redux/shop/actions";
@@ -30,11 +29,8 @@ const Products = () => {
   const [lastDoc, setLastDoc] = useState(null);
   const [products, setProducts] = useState([]);
   const dispatch = useDispatch();
-  const onLoadCategories = useCallback(async () => {
-    const categoryRef = firestore
-      .collection("categories")
-      .doc(currentUser.id)
-      .collection("categories");
+  const onLoadCategories = async () => {
+    const categoryRef = firestore.collection("categories");
     categoryRef.onSnapshot((snapShot) => {
       if (!snapShot.empty) {
         const categoriesArray = [];
@@ -42,14 +38,13 @@ const Products = () => {
           categoriesArray.push(item.data());
         });
         dispatch(setCategories(categoriesArray));
-        console.log(categoriesArray);
         setLoading(false);
       }
     });
-  }, [currentUser.id, dispatch]);
+  };
 
   const productsRef = firestore.collection("products");
-  const getProducts = useCallback(async () => {
+  const getProducts = async () => {
     setIsLoading(true);
 
     const snapshot = await productsRef.orderBy("created_at").limit(10);
@@ -63,14 +58,14 @@ const Products = () => {
         for (let i = 0; i < snapShot.docs.length; i++) {
           newProducts.push(snapShot.docs[i].data());
         }
-
+        console.log(newProducts);
         setProducts(newProducts);
       } else {
         setLastDoc(null);
       }
     });
     setIsLoading(false);
-  }, [productsRef]);
+  };
   const getMore = async () => {
     if (lastDoc) {
       setIsMoreLoading(true);
@@ -99,12 +94,14 @@ const Products = () => {
 
     onEndReachedCalled = true;
   };
-
+  const avProducts = () => {
+    return products.length ? products : DummyProducts;
+  };
   useEffect(() => {
     onLoadCategories();
     getProducts();
     return () => {};
-  }, [onLoadCategories, getProducts]);
+  }, []);
   return (
     <div className="admin-dashbord-products">
       <RoutePath route="/products" />
@@ -116,15 +113,19 @@ const Products = () => {
       <Spacing height="2em" />
       <ProductTable>
         <div className="table-data">
-          {DummyProducts.map((item, index) => (
-            <ProductTableRow
-              key={index}
-              data={item}
-              setDialogVisible={setDialogVisible}
-              setProductData={setProductData}
-              setType={setType}
-            />
-          ))}
+          {isLoading ? (
+            <Spinner style={{ height: "20vh" }} />
+          ) : (
+            products.map((item, index) => (
+              <ProductTableRow
+                key={index}
+                data={item}
+                setDialogVisible={setDialogVisible}
+                setProductData={setProductData}
+                setType={setType}
+              />
+            ))
+          )}
         </div>
       </ProductTable>
       <Dialog dialogVisible={dialogVisible} setDialogVisible={setDialogVisible}>

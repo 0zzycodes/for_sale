@@ -8,16 +8,16 @@ const ProductTopControl = ({ setQuery, setDialogVisible, setType }) => {
   return (
     <div className="flex-vertical-center products-top-control">
       <div className="flex-vertical-center products-top-controls-search">
-        <div className="flex-center product-search-icon">
-          <Ionicons name="md-search" size={24} color="black" />
-        </div>
-        <Spacing width="1em" />
         <input
           type="text"
           placeholder="Search product"
           onChange={({ target }) => setQuery(target.value)}
           className="product-search-input"
         />
+        <Spacing width="1em" />
+        <div className="flex-center product-search-icon">
+          <Ionicons name="md-search" size={24} color="black" />
+        </div>
       </div>
       <div className="flex-vertical-center products-top-controls-buttons">
         <CustomButton

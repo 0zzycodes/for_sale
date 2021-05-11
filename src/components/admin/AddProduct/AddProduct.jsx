@@ -5,6 +5,7 @@ import CustomPopUp from "../../common/CustomPopUp/CustomPopUp";
 import Spacing from "../../common/Spacing/Spacing";
 import Spinner from "../../common/Spinner/Spinner";
 import { useSelector } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 import CustomButton from "../../common/CustomButton/CustomButton";
 
 import "./styles.scss";
@@ -12,7 +13,6 @@ import { colors } from "../../../constants/Colors";
 import FormSelect from "../FormSelect/FormSelect";
 import { CreateProduct } from "../../../firebase/firestore";
 import { firestore } from "../../../firebase/config";
-import { GenerateRandomNDigits } from "../../../utils/helper";
 const AddProduct = ({ setDialogVisible }) => {
   const currentUser = useSelector(({ user }) => user.currentUser);
   const categories = useSelector(({ shop }) => shop.categories);
@@ -60,14 +60,11 @@ const AddProduct = ({ setDialogVisible }) => {
       setLoading(false);
     }
   };
-  function regenerateId() {
-    checkIfProductIdExist();
-  }
 
   async function checkIfProductIdExist(e) {
     setLoading(true);
     e.preventDefault();
-    const id = GenerateRandomNDigits(5);
+    const id = uuidv4().split("-").join("");
     if (
       productName.trim() === "" ||
       cost.trim() === "" ||
@@ -81,17 +78,10 @@ const AddProduct = ({ setDialogVisible }) => {
     }
     const productRef = await firestore
       .collection("products")
-      .doc(currentUser.id)
-      .collection("branch")
-      .doc(selectedBracnch.id)
-      .collection("products")
-      .where("id", "==", `${id}`);
+      .doc(productName.toLowerCase());
     const snapshot = await productRef.get();
-    if (snapshot.docs.length > 0) {
-      setErrorMessage(
-        "Id already existed so we are trying agin with another id"
-      );
-      regenerateId();
+    if (snapshot.exists) {
+      setErrorMessage("Product is already in inventory");
       setLoading(false);
       return;
     }
@@ -104,6 +94,7 @@ const AddProduct = ({ setDialogVisible }) => {
       price,
       cost,
       quantity,
+      sold: 0,
       profit: (price - cost) * quantity,
       notification,
       created_at: Date.now(),
@@ -111,7 +102,7 @@ const AddProduct = ({ setDialogVisible }) => {
       last_restock_quantity: quantity,
       product_sold_since_last_restock: 0,
       archived: false,
-      status: "In Stock",
+      query: productName.toLowerCase(),
     };
 
     onCreateProduct(productData);
@@ -212,6 +203,7 @@ const AddProduct = ({ setDialogVisible }) => {
                 type="number"
                 disabled
                 onChange={({ target }) => setProfit(target.value)}
+                style={{ cursor: "not-allowed" }}
               />
               <Spacing width="2em" />
               <CustomInput
@@ -227,7 +219,6 @@ const AddProduct = ({ setDialogVisible }) => {
               options={categories}
               value={category}
               onChange={({ target }) => {
-                console.log(target.value);
                 setCategory(target.value);
               }}
             />
